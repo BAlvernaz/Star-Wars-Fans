@@ -3,7 +3,7 @@ const peopleDiv = document.getElementById('people');
 const peopleDes = document.getElementById('peepInfo')
 const fetchSWPeople = async () => {
   const arrSWPeople = [];
-  for(let i = 1; i < 31; i++) {
+  for(let i = 1; i < 88; i++) {
     const responce = await fetch(`https://swapi.co/api/people/${i}/`)
     const people = await responce.json();
     arrSWPeople.push(people);
@@ -45,8 +45,8 @@ const createListItems = (person) => {
 const createPersonDes = (person) => {
  peopleDes.innerHTML =
  `
-   ${Object.keys(person)
-       .map(key => `<div>${key} ${person[key]}<div>`).join('')}
+   ${Object.keys(person).filter(key => key !== 'films' && key !== 'vehicles' && key !== 'starships')
+       .map(key => `<div>${key} ${person[key]}<div>`).filter(key => key !== 'films').join('')}
        `
 
 }
@@ -56,3 +56,5 @@ const clearDes = () => {
     peopleDes.firstChild.remove()
   }
 }
+
+renderPeople()
