@@ -56,3 +56,5 @@ const clearDes = () => {
     peopleDes.firstChild.remove()
   }
 }
+
+renderPeople()
