@@ -1,0 +1,14 @@
+#bigDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+#people {
+  flex: 3;
+  font-size: 16pt;
+}
+
+#peepInfo {
+  flex: 1;
+  font-size: 12pt;
+}

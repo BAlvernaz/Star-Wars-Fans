@@ -4,7 +4,7 @@ const peopleDes = document.getElementById('peepInfo')
 const fetchSWPeople = async () => {
   const arrSWPeople = [];
   for(let i = 1; i < 31; i++) {
-    const responce = await fetch(`https://swapi.co/api/people/${i}`)
+    const responce = await fetch(`https://swapi.co/api/people/${i}/`)
     const people = await responce.json();
     arrSWPeople.push(people);
   }
@@ -13,28 +13,46 @@ const fetchSWPeople = async () => {
 
 const renderPeople = async() => {
   const people = await fetchSWPeople();
-    createListOfPeople(people)
+    createList(people)
 }
 
-const createListOfPeople = (people) => {
-  const HTML =  `
-    <ul>
-      ${people.map(elem => `
-      <li class="SWPeople" id=${elem.name}> ${elem.name}</li>`).sort().join('')}
-    </ul>
-  `;
-   peopleDiv.innerHTML = HTML;
+const createList = (people) => {
+ const list = document.createElement('ul');
+
+ for (let person of people) {
+   const listItems = createListItems(person);
+   list.appendChild(listItems);
+ }
+
+ peopleDiv.appendChild(list);
 }
 
-renderPeople()
+const createListItems = (person) => {
+  const listItems = document.createElement('li')
+  listItems.classList.add('SWPeople')
+  listItems.textContent = `${person.name}`
+  listItems.addEventListener('click', (event) => {
 
-peopleDiv.addEventListener('click', (event) =>{
-  if (event.target.className === "SWPeople") {
- console.log(event.target)
+  event.target.style.fontWeight = 'bold'
+
+  clearDes()
+  createPersonDes(person)
+  })
+
+  return listItems
 }
-});
 
+const createPersonDes = (person) => {
+ peopleDes.innerHTML =
+ `
+   ${Object.keys(person)
+       .map(key => `<div>${key} ${person[key]}<div>`).join('')}
+       `
 
+}
 
-
-
+const clearDes = () => {
+  if (peopleDes.firstChild) {
+    peopleDes.firstChild.remove()
+  }
+}
