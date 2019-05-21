@@ -3,7 +3,7 @@ const peopleDiv = document.getElementById('people');
 const peopleDes = document.getElementById('peepInfo')
 const fetchSWPeople = async () => {
   const arrSWPeople = [];
-  for(let i = 1; i < 31; i++) {
+  for(let i = 1; i < 88; i++) {
     const responce = await fetch(`https://swapi.co/api/people/${i}/`)
     const people = await responce.json();
     arrSWPeople.push(people);
