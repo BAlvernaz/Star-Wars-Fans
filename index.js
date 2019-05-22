@@ -19,6 +19,7 @@ const renderPeople = async() => {
 const createList = (people) => {
  const list = document.createElement('ul');
 
+ // Indent a little off
  for (let person of people) {
    const listItems = createListItems(person);
    list.appendChild(listItems);
@@ -27,6 +28,7 @@ const createList = (people) => {
  peopleDiv.appendChild(list);
 }
 
+// Missing semicolons
 const createListItems = (person) => {
   const listItems = document.createElement('li')
   listItems.classList.add('SWPeople')
@@ -35,6 +37,7 @@ const createListItems = (person) => {
 
   event.target.style.fontWeight = 'bold'
 
+  // Good thought, but I don't think you need to clear it if you're setting the innerHTML anyway!
   clearDes()
   createPersonDes(person)
   })
@@ -42,6 +45,7 @@ const createListItems = (person) => {
   return listItems
 }
 
+// Good thinking in filtering out the keys that are nested objects!
 const createPersonDes = (person) => {
  peopleDes.innerHTML =
  `
